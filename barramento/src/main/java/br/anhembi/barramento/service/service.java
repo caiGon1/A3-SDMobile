@@ -21,13 +21,13 @@ public class service {
             + " em " + eventoDTO.getData());
 
         if (
-            repository.existsByNotifIdAndData(eventoDTO.getNotifId(), eventoDTO.getData()) ||
-            repository.existsByNotifIdAndData(eventoDTO.getAlertaId(), eventoDTO.getData()) ||
-            repository.existsByNotifIdAndData(eventoDTO.getLoginId(), eventoDTO.getData()) ||
-            repository.existsByNotifIdAndData(eventoDTO.getIaId(), eventoDTO.getData())
-        ) {
+            repository.existsByNotifIdAndData(eventoDTO.getNotifId(), eventoDTO.getData()) &&
+            repository.existsByAlertaIdAndData(eventoDTO.getAlertaId(), eventoDTO.getData()) &&
+            repository.existsByLoginIdAndData(eventoDTO.getLoginId(), eventoDTO.getData()) &&
+            repository.existsByIaIdAndData(eventoDTO.getIaId(), eventoDTO.getData())
+        ){
             return false; // Evento duplicado
-        }
+        }else{
 
         model evento = new model();
         evento.setUserId((long) eventoDTO.getUserId());
@@ -43,5 +43,6 @@ public class service {
 
         repository.save(evento);
         return true;
+        }
     }
 }

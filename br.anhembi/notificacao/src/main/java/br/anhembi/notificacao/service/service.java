@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import br.anhembi.notificacao.repo.repo;
 import br.anhembi.notificacao.dto.EventoDTO;
 import br.anhembi.notificacao.model.model;
