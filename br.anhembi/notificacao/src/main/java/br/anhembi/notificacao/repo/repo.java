@@ -1,6 +1,8 @@
 package br.anhembi.notificacao.repo;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +19,13 @@ public interface repo extends JpaRepository<model, Integer> {
 
     @Query("SELECT p.valorSaida FROM model p WHERE p.userId = :userId ORDER BY p.notifId DESC")
     List<Double> findValorByUserId(@Param("userId") int userId, Pageable pageable);
+
+   Optional<model> findTopByUserIdOrderByNotifIdDesc(int userId);
+
+
+
+
+
 
 }
 
