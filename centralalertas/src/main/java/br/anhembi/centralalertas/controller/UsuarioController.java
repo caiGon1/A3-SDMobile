@@ -9,12 +9,17 @@ import br.anhembi.centralalertas.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
 public class UsuarioController {
+    @GetMapping("/usuarios")
+public List<Usuario> listarUsuarios() {
+    return usuarioRepository.findAll();
+}
 
     @Autowired
     private UsuarioRepository usuarioRepository;
