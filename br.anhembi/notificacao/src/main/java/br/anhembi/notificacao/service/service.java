@@ -63,7 +63,8 @@ public String verificar() {
 
         EventoDTO evento = new EventoDTO();
         evento.setUserId((long) 1);
-        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc( (long) 1).map(model::getData).orElse(null));
+        evento.setNotifId(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getNotifId).orElse(null));
+        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getData).orElse(null));
         evento.setMensagem(mensagem);
         
         //envio para o barramento

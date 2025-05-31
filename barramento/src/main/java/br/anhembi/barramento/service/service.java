@@ -20,7 +20,12 @@ public class service {
             + ": " + eventoDTO.getMensagem()
             + " em " + eventoDTO.getData());
 
-            if (repository.existsByUserIdAndData(eventoDTO.getUserId(), eventoDTO.getData())) {
+        if (
+            repository.existsByNotifIdAndData(eventoDTO.getNotifId(), eventoDTO.getData()) ||
+            repository.existsByNotifIdAndData(eventoDTO.getAlertaId(), eventoDTO.getData()) ||
+            repository.existsByNotifIdAndData(eventoDTO.getLoginId(), eventoDTO.getData()) ||
+            repository.existsByNotifIdAndData(eventoDTO.getIaId(), eventoDTO.getData())
+        ) {
             return false; // Evento duplicado
         }
 
@@ -28,6 +33,13 @@ public class service {
         evento.setUserId((long) eventoDTO.getUserId());
         evento.setData(eventoDTO.getData());
         evento.setMensagem(eventoDTO.getMensagem());
+        evento.setNotifId(eventoDTO.getNotifId());
+        evento.setAlertaId(eventoDTO.getAlertaId());
+        evento.setIaId(eventoDTO.getIaId());
+        evento.setLoginId(eventoDTO.getLoginId());
+        evento.setEmail(eventoDTO.getEmail());
+        evento.setSenha(eventoDTO.getSenha());
+
 
         repository.save(evento);
         return true;
