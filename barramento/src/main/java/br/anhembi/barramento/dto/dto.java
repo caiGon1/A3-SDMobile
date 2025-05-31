@@ -3,16 +3,16 @@ package br.anhembi.barramento.dto;
 import java.time.LocalDate;
 
 public class dto {
-    private int userId;
+    private Long userId;
     private LocalDate data;
     private String mensagem;
 
     // Getters and Setters
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

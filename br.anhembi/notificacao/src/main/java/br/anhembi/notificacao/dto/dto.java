@@ -3,17 +3,17 @@ package br.anhembi.notificacao.dto;
 import java.time.LocalDate;
 
 public class dto {
-private int userId;
-private int notifId;
+private Long userId;
+private Long notifId;
 private LocalDate data;
 private double valorSaida;
 
 
 
-public int getNotifId() {
+public Long getNotifId() {
     return notifId;
 }
-public void setNotifId(int notifId) {
+public void setNotifId(Long notifId) {
     this.notifId = notifId;
 }
 public LocalDate getData() {
@@ -28,17 +28,17 @@ public double getValorSaida() {
 public void setValorSaida(double valorSaida) {
     this.valorSaida = valorSaida;
 }
-public int getUserId() {
+public Long getUserId() {
     return userId;
 }
-public void setUserId(int userId) {
+public void setUserId(Long userId) {
     this.userId = userId;
 }
 
 
 public dto() {
 }
-public dto(int notifId, LocalDate data, double valorSaida, int userId) {
+public dto(Long notifId, LocalDate data, double valorSaida, Long userId) {
     this.userId = userId;
     this.notifId = notifId;
     this.data = data;

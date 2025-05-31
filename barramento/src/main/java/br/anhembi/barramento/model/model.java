@@ -13,18 +13,18 @@ import jakarta.persistence.Table;
 public class model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int eventoId;
+    private Long eventoId;
 
-    private int userId;
+    private Long userId;
     private String mensagem;
     private LocalDate data;
 
     // Getters and Setters
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -45,11 +45,11 @@ public class model {
 
     }
 
-    public int getEventoId() {
+    public Long getEventoId() {
         return eventoId;
     }
 
-    public void setEventoId(int eventoId) {
+    public void setEventoId(Long eventoId) {
         this.eventoId = eventoId;
     }
     

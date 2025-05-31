@@ -13,9 +13,9 @@ public class model {
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int notifId;
+private Long notifId;
 
-private int userId;
+private Long userId;
 
 private LocalDate data;
 
@@ -24,7 +24,7 @@ private double valorSaida;
 
 public model() {
 }
-public model(int userId, int notifId, LocalDate data, double valorSaida) {
+public model(Long userId, Long notifId, LocalDate data, double valorSaida) {
     this.userId = userId;
     this.notifId = notifId;
     this.data = data;
@@ -52,16 +52,16 @@ public double getValorSaida() {
 public void setValorSaida(double valorSaida) {
     this.valorSaida = valorSaida;
 }
-public int getUserId() {
+public Long  getUserId() {
     return userId;
 }
-public void setUserId(int userId) {
+public void setUserId(Long userId) {
     this.userId = userId;
 }
-public int getNotifId() {
+public Long getNotifId() {
     return notifId;
 }
-public void setNotifId(int notifId) {
+public void setNotifId(Long notifId) {
     this.notifId = notifId;
 }
 

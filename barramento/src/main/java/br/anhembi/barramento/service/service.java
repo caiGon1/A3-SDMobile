@@ -25,7 +25,7 @@ public class service {
         }
 
         model evento = new model();
-        evento.setUserId(eventoDTO.getUserId());
+        evento.setUserId((long) eventoDTO.getUserId());
         evento.setData(eventoDTO.getData());
         evento.setMensagem(eventoDTO.getMensagem());
 

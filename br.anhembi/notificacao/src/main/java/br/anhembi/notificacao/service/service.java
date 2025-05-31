@@ -34,15 +34,15 @@ public class service {
 
 
 
-    public boolean isSuspeita(int userId) {
-        List<Double> ultimosValores = repo.findAllExceptLast(1);
+    public boolean isSuspeita(long userId) {
+        List<Double> ultimosValores = repo.findAllExceptLast(userId);
         if (ultimosValores.isEmpty()) return false;
         double media = ultimosValores.stream()
                                      .mapToDouble(Double::doubleValue)
                                      .average()
                                      .orElse(0.0);
-                                     
-        double ultimoValor=repo.findValorByUserId(1, PageRequest.of(0, 1)).stream().findFirst().orElse(null);
+
+        double ultimoValor = repo.findValorByUserId((long) 1, PageRequest.of(0, 1)).stream().findFirst().orElse(null);
 
         return ultimoValor > media * 1.5;
     
@@ -62,10 +62,11 @@ public String verificar() {
         }
 
         EventoDTO evento = new EventoDTO();
-        evento.setUserId(1);
-        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc(1).map(model::getData).orElse(null));
+        evento.setUserId((long) 1);
+        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc( (long) 1).map(model::getData).orElse(null));
         evento.setMensagem(mensagem);
-
+        
+        //envio para o barramento
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -81,7 +82,13 @@ public String verificar() {
 
         return mensagem;
     }
+    public model create(model newBody) {
+        return repo.save(newBody);
     }
+    public List<model> findById(long userId) {
+        return repo.findAllByUserId(userId);
+    }
+}
 
 
 

@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 
 public class EventoDTO {
-    private int userId;
+    private Long userId;
     private String mensagem;
     private LocalDate data;
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
