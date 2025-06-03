@@ -21,9 +21,9 @@ public class service {
             + " em " + eventoDTO.getData());
 
         if (
+            repository.existsByUserIdAndData(eventoDTO.getUserId(), eventoDTO.getData()) &&
             repository.existsByNotifIdAndData(eventoDTO.getNotifId(), eventoDTO.getData()) &&
             repository.existsByAlertaIdAndData(eventoDTO.getAlertaId(), eventoDTO.getData()) &&
-            repository.existsByLoginIdAndData(eventoDTO.getLoginId(), eventoDTO.getData()) &&
             repository.existsByIaIdAndData(eventoDTO.getIaId(), eventoDTO.getData())
         ){
             return false; // Evento duplicado
@@ -36,10 +36,6 @@ public class service {
         evento.setNotifId(eventoDTO.getNotifId());
         evento.setAlertaId(eventoDTO.getAlertaId());
         evento.setIaId(eventoDTO.getIaId());
-        evento.setLoginId(eventoDTO.getLoginId());
-        evento.setEmail(eventoDTO.getEmail());
-        evento.setSenha(eventoDTO.getSenha());
-
 
         repository.save(evento);
         return true;

@@ -18,11 +18,6 @@ public class model {
     private Long notifId;
     private Long alertaId;
     private Long iaId;
-    private Long loginId;
-
-    private String email;
-    private String senha;
-
     private String mensagem;
     private LocalDate data;
 
@@ -84,28 +79,6 @@ public class model {
         this.iaId = iaId;
     }
 
-    public Long getLoginId() {
-        return loginId;
-    }
 
-    public void setLoginId(Long loginId) {
-        this.loginId = loginId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
 }
