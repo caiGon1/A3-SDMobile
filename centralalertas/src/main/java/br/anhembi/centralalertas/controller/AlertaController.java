@@ -1,4 +1,4 @@
-package br.anhembi.centralalertas.controller;
+package br.anhembi.centralalertas;
 
 import br.anhembi.centralalertas.dto.AlertaDTO;
 import br.anhembi.centralalertas.service.Alertaservice;
@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/alertas")
 public class AlertaController {
-    public void processarAlerta(AlertaDTO alerta) {
-        
-    }
 
     @Autowired
-    private AlertaService alertaService;
+    private Alertaservice alertaService;
 
     @PostMapping
     public ResponseEntity<String> receberAlerta(@RequestBody AlertaDTO alerta) {

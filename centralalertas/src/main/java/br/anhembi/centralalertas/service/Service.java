@@ -4,7 +4,7 @@ import config.*;
 
 
 public class Service {
-private RestTemplate restTemplate = new RestTemplate();
+private Service service = new Service();
 
 
 public void service (RestTemplate restTemplate) {
@@ -12,14 +12,5 @@ public void service (RestTemplate restTemplate) {
 this.restTemplate = restTemplate;
 
 }
-
-
-
-
-
-
-
-
-
 
 }

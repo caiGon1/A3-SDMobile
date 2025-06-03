@@ -7,8 +7,8 @@ import config.*;
 
 
 public class EventoDTO {
-    private Long userId;
-    private Long notifId;
+    private Long userID;
+    private Long alertaID;
     private String mensagem;
     private LocalDate data;
 
