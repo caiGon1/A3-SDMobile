@@ -1,5 +1,6 @@
 package br.anhembi.notificacao.controller;
 
+import br.anhembi.notificacao.dto.dto;
 import br.anhembi.notificacao.model.model;
 import br.anhembi.notificacao.service.service;
 
@@ -43,5 +44,11 @@ public class controller {
         }
         model newBody = service.create(newModel);
         return ResponseEntity.ok(newBody);
+    }
+    
+    @PostMapping
+    public ResponseEntity<dto> receber(@RequestBody dto dto) {
+        service.processarDto(dto);
+        return ResponseEntity.ok(dto);
     }
 }

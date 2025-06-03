@@ -13,12 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import br.anhembi.notificacao.repo.repo;
 import br.anhembi.notificacao.dto.EventoDTO;
+import br.anhembi.notificacao.dto.dto;
 import br.anhembi.notificacao.model.model;
 
 @Service
 public class service {
     
-
+    dto dto = new dto();
     private final RestTemplate restTemplate;
 
     public service(RestTemplate restTemplate) {
@@ -31,26 +32,33 @@ public class service {
     private repo repo;
 
 
-
+    public dto processarDto(dto dto) {
+        this.dto.setLogin(dto.isLogin());
+        this.dto.setUserId(dto.getUserId());
+        System.out.println("Recebido: " + dto.isLogin() + " UserId: " + dto.getUserId());
+        return this.dto;
+    }
 
     public boolean isSuspeita(long userId) {
-        List<Double> ultimosValores = repo.findAllExceptLast(userId);
+        List<Double> ultimosValores = repo.findAllExceptLast(dto.getUserId());
         if (ultimosValores.isEmpty()) return false;
         double media = ultimosValores.stream()
                                      .mapToDouble(Double::doubleValue)
                                      .average()
                                      .orElse(0.0);
 
-        double ultimoValor = repo.findValorByUserId((long) 1, PageRequest.of(0, 1)).stream().findFirst().orElse(null);
+        double ultimoValor = repo.findValorByUserId(dto.getUserId(), PageRequest.of(0, 1)).stream().findFirst().orElse(null);
 
         return ultimoValor > media * 1.5;
     
 }
 
-@Scheduled(fixedRate = 5000)
-public String verificar() {
-        boolean suspeita = isSuspeita(1);
 
+
+public void verificar() {
+
+
+        boolean suspeita = isSuspeita(dto.getUserId());
         String mensagem;
         if (suspeita) {
             System.out.println("Notificação: Transação anormal (valor acima da média histórica)");
@@ -61,9 +69,9 @@ public String verificar() {
         }
 
         EventoDTO evento = new EventoDTO();
-        evento.setUserId((long) 1);
-        evento.setNotifId(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getNotifId).orElse(null));
-        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getData).orElse(null));
+        evento.setUserId(dto.getUserId());
+        evento.setNotifId(repo.findTopByUserIdOrderByNotifIdDesc(dto.getUserId()).map(model::getNotifId).orElse(null));
+        evento.setData(repo.findTopByUserIdOrderByNotifIdDesc(dto.getUserId()).map(model::getData).orElse(null));
         evento.setMensagem(mensagem);
         
         //envio para o barramento
@@ -80,15 +88,29 @@ public String verificar() {
             System.err.println("❌ Erro ao enviar evento: " + e.getMessage());
         }
 
-        return mensagem;
     }
+
+
+
+@Scheduled(fixedRate = 5000)
+public void verificarTransacoes() {
+    boolean login = dto.isLogin();
+    if (login) {
+        verificar();
+    } else {
+        System.out.println("Usuário não está logado, não será verificado." + dto.isLogin() + " UserId: " + dto.getUserId());
+    }
+}
+
     public model create(model newBody) {
         return repo.save(newBody);
     }
     public List<model> findById(long userId) {
         return repo.findAllByUserId(userId);
     }
+
 }
+
 
 
 

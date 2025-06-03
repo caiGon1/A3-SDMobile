@@ -1,5 +1,6 @@
 package br.anhembi.notificacao.model;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ public class model {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long notifId;
+
 
 private Long userId;
 

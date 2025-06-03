@@ -3,6 +3,7 @@ package br.anhembi.notificacao.dto;
 import java.time.LocalDate;
 
 public class dto {
+private boolean login;
 private Long userId;
 private Long notifId;
 private LocalDate data;
@@ -36,6 +37,7 @@ public void setUserId(Long userId) {
 }
 
 
+
 public dto() {
 }
 public dto(Long notifId, LocalDate data, double valorSaida, Long userId) {
@@ -43,6 +45,14 @@ public dto(Long notifId, LocalDate data, double valorSaida, Long userId) {
     this.notifId = notifId;
     this.data = data;
     this.valorSaida = valorSaida;
+}
+
+
+public void setLogin(boolean login) {
+    this.login = login;
+}
+public boolean isLogin() {
+    return login;
 }
 
 
