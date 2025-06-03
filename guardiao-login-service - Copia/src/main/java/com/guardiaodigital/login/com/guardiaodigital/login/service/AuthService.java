@@ -51,7 +51,7 @@ public class AuthService {
         }
             HttpEntity<eventodto> httpEntityEvento = new HttpEntity<>(eventoDTO, headers); //envio ao barramento
         try{
-            restTemplate.postForEntity(evento, httpEntityEvento, com.guardiaodigital.login.com.guardiaodigital.login.dto.eventodto.class);
+            restTemplate.postForEntity(evento, httpEntityEvento, String.class);
             System.out.println("Evento enviado");
         } catch (Exception e) {
             System.err.println("Erro ao enviar evento: " + e.getMessage());
