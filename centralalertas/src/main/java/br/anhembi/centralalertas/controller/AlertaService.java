@@ -9,6 +9,12 @@ public class AlertaService {
 
     @Autowired
 private EmailService emailService;
+@Autowired
+
+
+public void enviarAlertaParaUsuario(String email, String mensagem) {
+    emailService.enviarEmail(email, "Alerta Importante", mensagem);
+}
 
     public void processarAlerta(AlertaDTO alerta) {
         // TODO Auto-generated method stub

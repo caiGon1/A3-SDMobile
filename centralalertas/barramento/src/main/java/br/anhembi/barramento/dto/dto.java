@@ -3,13 +3,10 @@ package br.anhembi.barramento.dto;
 import java.time.LocalDate;
 
 public class dto {
-
-    
     private Long userId;
     private Long notifId;
     private Long alertaId;
     private Long iaId;
-    private Long loginId;
 
     private String email;
     private String senha;
@@ -65,13 +62,6 @@ public class dto {
         this.iaId = iaId;
     }
 
-    public Long getLoginId() {
-        return loginId;
-    }
-
-    public void setLoginId(Long loginId) {
-        this.loginId = loginId;
-    }
 
     public String getEmail() {
         return email;

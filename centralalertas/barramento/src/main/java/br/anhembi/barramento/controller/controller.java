@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.anhembi.barramento.dto.dto;
-import br.anhembi.barramento.service.service;
+import br.anhembi.barramento.service.BarramentoService;
 
 @RestController
 @RequestMapping("/api/eventos")
 public class controller {
 
-private final service service;
+private final BarramentoService service;
 
-    public controller(service service) {
+    public controller(BarramentoService service) {
         this.service = service;
     }
 

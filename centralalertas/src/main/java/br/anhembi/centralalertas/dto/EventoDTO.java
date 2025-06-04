@@ -1,22 +1,47 @@
 package br.anhembi.centralalertas.dto;
 
 import java.time.LocalDate;
-import org.springframework.http.HttpEntity;
-import java.time.LocalDate;
-import config.*;
-
 
 public class EventoDTO {
+
     private Long userID;
     private Long alertaID;
     private String mensagem;
     private LocalDate data;
 
-    EventoDTO evento = new EventoDTO();
+    // Construtor padrão
+    public EventoDTO() {}
 
-evento.setUserId ((long) 1);
-evento.setNotifId(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getNotifId).orElse (other: null));
-evento.setData(repo.findTopByUserIdOrderByNotifIdDesc((long) 1).map(model::getData).orElse(other: null));
-evento.setMensagem (mensagem);
+    // Getters e Setters
+    public Long getUserID() {
+        return userID;
+    }
 
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    public Long getAlertaID() {
+        return alertaID;
+    }
+
+    public void setAlertaID(Long alertaID) {
+        this.alertaID = alertaID;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
 }
