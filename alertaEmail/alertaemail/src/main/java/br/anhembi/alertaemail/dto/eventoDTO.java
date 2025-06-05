@@ -9,8 +9,14 @@ public class eventoDTO {
     private String email;
     private String mensagem;
     private LocalDate data;
-    
 
+    public Long getNotifId() {
+        return notifId;
+    }
+
+    public void setNotifId(Long notifId) {
+        this.notifId = notifId;
+    }
 
     public Long getUserId() {
         return userId;
@@ -41,12 +47,6 @@ public class eventoDTO {
     }
     public void setData(LocalDate data) {
         this.data = data;
-    }
-    public Long getNotifId() {
-        return notifId;
-    }
-    public void setNotifId(Long notifId) {
-        this.notifId = notifId;
     }
 
 }

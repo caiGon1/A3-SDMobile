@@ -18,7 +18,6 @@ public class model {
     private Long notifId;
     private LocalDate data;
     private String email;
-    private String destinatario;
     private String assunto;
     private String mensagem;
     
@@ -33,12 +32,6 @@ public class model {
     }
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-    public String getDestinatario() {
-        return destinatario;
-    }
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
     }
     public String getAssunto() {
         return assunto;

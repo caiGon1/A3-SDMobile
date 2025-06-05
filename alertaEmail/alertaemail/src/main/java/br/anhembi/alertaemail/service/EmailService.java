@@ -60,7 +60,7 @@ public class EmailService {
 
         if(dto.isSuspeita()){
             String subject = "Alerta de transação suspeita";
-        String mensagem = "Foi detectada uma atividade suspeita em sua conta. " +
+            String mensagem = "Foi detectada uma atividade suspeita em sua conta. " +
                             "Por favor, verifique suas transações recentes. " +
                             "Se você não reconhece essa atividade, entre em contato conosco imediatamente.";
             destinatario = dto.getDestinatario();
@@ -72,14 +72,7 @@ public class EmailService {
             message.setText(mensagem);
             mailSender.send(message);
 
-            eventoDTO evento = new eventoDTO();
             
-            evento.setUserId(dto.getUserId());
-            evento.setNotifId(dto.getNotifId());
-            evento.setMensagem("Email enviado para " + destinatario + " com assunto: " + subject);
-            evento.setAlertaId(dto.getAlertaId());
-            evento.setData(LocalDate.now());
-            evento.setEmail(destinatario);
 
             model model = new model();
             model.setAlertaId(dto.getAlertaId());
@@ -87,25 +80,28 @@ public class EmailService {
             model.setUserId(dto.getUserId());
             model.setEmail(destinatario);
             model.setData(LocalDate.now());
-            model.setDestinatario(destinatario);
             model.setAssunto(subject);
             model.setMensagem("Email enviado para " + destinatario + " com assunto: " + subject);
             repo.save(model);
+
+            eventoDTO evento = new eventoDTO();
+            
+            evento.setUserId(dto.getUserId());
+            evento.setNotifId(dto.getNotifId());
+            evento.setAlertaId(repo.findTopByUserIdOrderByAlertaIdDesc(dto.getUserId()).get().getAlertaId());
+            evento.setMensagem("Email enviado para " + destinatario + " com assunto: " + subject);
+            evento.setData(LocalDate.now());
+            evento.setEmail(dto.getDestinatario());
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<eventoDTO> request = new HttpEntity<eventoDTO>(evento, headers);
 
-            try {
+            
             restTemplate.postForEntity("http://localhost:8082/api/eventos", request, String.class);
             System.out.println("Evento enviado ao barramento");
-            } catch (Exception e) {
-            System.err.println("Erro ao enviar evento: " + e.getMessage());
-    }
-            
-
-        } catch (Exception e) {
+            }catch (Exception e) {
            System.out.println("Erro ao enviar o email: " + e.getMessage());
            return "Erro ao enviar o email";
         }
