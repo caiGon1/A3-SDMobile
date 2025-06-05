@@ -1,6 +1,5 @@
 package br.anhembi.notificacao.model;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;

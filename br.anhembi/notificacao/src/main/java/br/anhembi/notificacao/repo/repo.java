@@ -19,6 +19,9 @@ public interface repo extends JpaRepository<model, Long> {
     @Query("SELECT p.valorSaida FROM model p WHERE p.userId = :userId ORDER BY p.notifId DESC")
     List<Double> findValorByUserId(@Param("userId") Long userId, Pageable pageable);
 
+    @Query("SELECT p.notifId FROM model p WHERE p.userId = :userId ORDER BY p.notifId DESC")
+    List<Long> findNotifIdByUserId(Long userId);
+
     Optional<model> findTopByUserIdOrderByNotifIdDesc(Long userId);
 
     List<model> findAllByUserId(Long userId);

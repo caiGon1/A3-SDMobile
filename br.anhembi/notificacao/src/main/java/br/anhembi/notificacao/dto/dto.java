@@ -8,6 +8,7 @@ private Long userId;
 private Long notifId;
 private LocalDate data;
 private double valorSaida;
+private String email;
 
 
 
@@ -53,6 +54,12 @@ public void setLogin(boolean login) {
 }
 public boolean isLogin() {
     return login;
+}
+public String getEmail() {
+    return email;
+}
+public void setEmail(String email) {
+    this.email = email;
 }
 
 

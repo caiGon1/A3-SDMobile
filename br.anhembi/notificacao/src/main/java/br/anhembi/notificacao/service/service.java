@@ -14,11 +14,15 @@ import org.springframework.web.client.RestTemplate;
 import br.anhembi.notificacao.repo.repo;
 import br.anhembi.notificacao.dto.EventoDTO;
 import br.anhembi.notificacao.dto.dto;
+import br.anhembi.notificacao.dto.emailDto;
 import br.anhembi.notificacao.model.model;
 
 @Service
 public class service {
     
+    String eventos = "http://localhost:8082/api/eventos";
+    String alertaEmail = "http://localhost:8081/alertaemail";
+
     dto dto = new dto();
     private final RestTemplate restTemplate;
 
@@ -35,7 +39,8 @@ public class service {
     public dto processarDto(dto dto) {
         this.dto.setLogin(dto.isLogin());
         this.dto.setUserId(dto.getUserId());
-        System.out.println("Recebido: " + dto.isLogin() + " UserId: " + dto.getUserId());
+        this.dto.setEmail(dto.getEmail());
+        System.out.println("Recebido: " + dto.isLogin() + " UserId: " + dto.getUserId() + " Email: " + dto.getEmail());
         return this.dto;
     }
 
@@ -63,6 +68,23 @@ public void verificar() {
         if (suspeita) {
             System.out.println("Notificação: Transação anormal (valor acima da média histórica)");
             mensagem = "Notificação: Transação anormal (valor acima da média histórica)";
+
+            emailDto emailDto = new emailDto();
+
+            emailDto.setSuspeita(suspeita);
+            emailDto.setUserId(dto.getUserId());
+            emailDto.setNotifId(repo.findNotifIdByUserId(dto.getUserId()).stream().findFirst().orElse(null));
+            emailDto.setDestinatario(dto.getEmail());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<emailDto> request = new HttpEntity<emailDto>(emailDto, headers);
+
+            try {
+                restTemplate.postForEntity(alertaEmail, request, emailDto.class);
+                System.out.println("Email enviado ao usuário");
+            } catch (Exception e) {
+                System.err.println("Erro ao enviar email: " + e.getMessage());
+            }
         } else {
             System.out.println("Transação normal");
             mensagem = "Transação normal";
@@ -82,13 +104,13 @@ public void verificar() {
         HttpEntity<EventoDTO> request = new HttpEntity<EventoDTO>(evento, headers);
 
         try {
-            restTemplate.postForEntity("http://localhost:8082/api/eventos", request, String.class);
+            restTemplate.postForEntity(eventos, request, String.class);
             System.out.println("📤 Evento enviado ao barramento");
         } catch (Exception e) {
             System.err.println("❌ Erro ao enviar evento: " + e.getMessage());
         }
 
-    }
+}
 
 
 
