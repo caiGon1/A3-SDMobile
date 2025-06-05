@@ -1,9 +1,0 @@
-br\anhembi\centralalertas\controller\UsuarioController.class
-br\anhembi\centralalertas\dto\AlertaDTO.class
-br\anhembi\centralalertas\CentralalertasApplication\CentralalertasApplication.class
-br\anhembi\centralalertas\repository\UsuarioRepository.class
-br\anhembi\centralalertas\model\Alerta.class
-br\anhembi\centralalertas\model\Usuario.class
-br\anhembi\centralalertas\controller\AlertaController.class
-br\anhembi\centralalertas\repository\AlertaRepository.class
-br\anhembi\centralalertas\service\AlertaService.class
