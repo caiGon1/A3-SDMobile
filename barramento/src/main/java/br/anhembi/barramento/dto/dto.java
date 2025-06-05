@@ -7,9 +7,7 @@ public class dto {
     private Long notifId;
     private Long alertaId;
     private Long iaId;
-
     private String email;
-    private String senha;
     private LocalDate data;
     private String mensagem;
 
@@ -71,12 +69,6 @@ public class dto {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
 }

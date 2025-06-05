@@ -18,6 +18,7 @@ public class model {
     private Long notifId;
     private Long alertaId;
     private Long iaId;
+    private String email;
     private String mensagem;
     private LocalDate data;
 
@@ -77,6 +78,12 @@ public class model {
 
     public void setIaId(Long iaId) {
         this.iaId = iaId;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 
