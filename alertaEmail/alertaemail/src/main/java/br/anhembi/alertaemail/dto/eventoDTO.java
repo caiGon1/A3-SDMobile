@@ -49,4 +49,16 @@ public class eventoDTO {
         this.data = data;
     }
 
+    public eventoDTO() {
+    }
+
+    public eventoDTO(Long userId, Long alertaId, Long notifId, String email, String mensagem, LocalDate data) {
+        this.userId = userId;
+        this.alertaId = alertaId;
+        this.notifId = notifId;
+        this.email = email;
+        this.mensagem = mensagem;
+        this.data = data;
+    }
+
 }

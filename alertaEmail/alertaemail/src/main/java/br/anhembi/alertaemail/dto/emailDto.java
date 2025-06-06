@@ -5,12 +5,13 @@ public class emailDto {
     private Long userId;
     private Long alertaId;
     private Long notifId;
-    private String destinatario;
+    private String email;
+    private String mensagem;
     public boolean isSuspeita() {
         return suspeita;
     }
-    public void setSuspeita(boolean suspeita) {
-        this.suspeita = suspeita;
+    public boolean setSuspeita(boolean suspeita) {
+        return this.suspeita = suspeita;
     }
     public Long getUserId() {
         return userId;
@@ -24,17 +25,40 @@ public class emailDto {
     public void setAlertaId(Long alertaId) {
         this.alertaId = alertaId;
     }
-    public String getDestinatario() {
-        return destinatario;
+    public String getEmail() {
+        return email;
     }
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
+    public void setEmail(String email) {
+        this.email = email;
     }
     public Long getNotifId() {
         return notifId;
     }
-    public void setNotifId(Long notifId) {
+    public Long setNotifId(Long notifId) {
+        return this.notifId = notifId;
+    }
+    public emailDto() {
+    }
+    public emailDto(boolean suspeita, Long userId, Long alertaId, Long notifId, String email, String mensagem) {
+        this.suspeita = suspeita;
+        this.userId = userId;
+        this.alertaId = alertaId;
         this.notifId = notifId;
+        this.email = email;
+        this.mensagem = mensagem;
+    }
+    
+
+    public emailDto(boolean suspeita, Long notifId, String mensagem) {
+        this.suspeita = suspeita;
+        this.notifId = notifId;
+        this.mensagem = mensagem;
+    }
+    public String getMensagem() {
+        return mensagem;
+    }
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
     // Getters and Setters
