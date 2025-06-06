@@ -15,8 +15,9 @@ import java.util.Optional;
 
 @Service
 public class AuthService {
-    String url = "http://localhost:8080/notificacao";
-    String evento = "http://localhost:8082/api/eventos";
+    static String email = "http://localhost:8081/alertaemail";
+    static String url = "http://localhost:8080/notificacao";
+    static String evento = "http://localhost:8082/api/eventos";
     private final RestTemplate restTemplate;
 
     public AuthService(RestTemplate restTemplate) {
@@ -33,6 +34,7 @@ public class AuthService {
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if (user.isPresent() && user.get().getPassword().equals(request.getPassword())) {
             dtoV.setLogin(true);
+            dtoV.setEmail(user.get().getEmail());
             dtoV.setUserId(user.get().getUserId());
 
             eventoDTO.setMensagem("Login realizado com sucesso.");
@@ -42,23 +44,34 @@ public class AuthService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<dtoVerif> httpEntity = new HttpEntity<>(dtoV, headers);
-        
+
+
+    if (HealthCheckService.isServiceUp() == true) {
         try {
             restTemplate.postForEntity(url, httpEntity, dtoVerif.class); //envio a verificação
             System.out.println("Login realizado.");
         } catch (Exception e) {
             System.err.println("Erro ao enviar: " + e.getMessage());
         }
-            HttpEntity<eventodto> httpEntityEvento = new HttpEntity<>(eventoDTO, headers); //envio ao barramento
-        try{
-            restTemplate.postForEntity(evento, httpEntityEvento, String.class);
-            System.out.println("Evento enviado");
+    } else {
+        try {
+            restTemplate.postForEntity(email, httpEntity, dtoVerif.class); //envio ao email.
+            System.out.println("Enviado ao email.");
         } catch (Exception e) {
-            System.err.println("Erro ao enviar evento: " + e.getMessage());
+            System.err.println("Erro ao enviar: " + e.getMessage());
         }
-            return ResponseEntity.ok("Login realizado.");
+    }
 
-        }
+    HttpEntity<eventodto> httpEntityEvento = new HttpEntity<>(eventoDTO, headers); //envio ao barramento
+    try {
+        restTemplate.postForEntity(evento, httpEntityEvento, String.class);
+        System.out.println("Evento enviado");
+    } catch (Exception e) {
+        System.err.println("Erro ao enviar evento: " + e.getMessage());
+    }
+    return ResponseEntity.ok("Login realizado.");
+
+}
 
 
 
