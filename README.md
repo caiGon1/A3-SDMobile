@@ -1,16 +1,16 @@
 Trabalho A3 - Sistemas Distribuidos e Mobile com parceira com Bradesco com o tema: GOLPES.
-================================================================================================
+============================================================================================
 Integrantes: 
 Caio Gonçalves
 Daniel Cardoso
 Gian Tozzatti
 Guilherme Mendes
 
-================================================================================================
+============================================================================================
 
 PUBLICO ALVO: Idosos e população mais vulnerável
 
-================================================================================================
+============================================================================================
 
 GUIA DO PROGRAMA:
 
@@ -25,5 +25,5 @@ Caso há algum problema no microserviço de "notificação/verificação", os mi
 utilizando dados vindo do banco de dados do barramento de eventos por intermédio do Docker e Kafka para enviar
 emails caso há alguma pendência de notificação armazenada.
 
-==================================================================================================
+==============================================================================================
 
