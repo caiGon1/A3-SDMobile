@@ -25,5 +25,5 @@ Caso há algum problema no microserviço de "notificação/verificação", os mi
 utilizando dados vindo do banco de dados do barramento de eventos por intermédio do Docker e Kafka para enviar
 emails caso há alguma pendência de notificação armazenada.
 
-==============================================================================================
+============================================================================================
 
