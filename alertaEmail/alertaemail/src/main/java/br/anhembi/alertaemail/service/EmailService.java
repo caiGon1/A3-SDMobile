@@ -109,11 +109,11 @@ if(suspeita==true){
             System.out.println("Alerta já processado: " + dto.getNotifId());
         }else if (dto.getNotifId() == null) {
             producer.solicitarUltimaNotificacaoSuspeita(dto.getUserId(), dto.getEmail());
-        }else if(dto.getNotifId()!=null){
-            dto.setSuspeita(this.dto.isSuspeita());
+        }else{
+            this.dto.setSuspeita(dto.isSuspeita());
             this.dto.setUserId(dto.getUserId());
             this.dto.setEmail(dto.getEmail());
-            dto.setNotifId(this.dto.getNotifId());
+            this.dto.setNotifId(dto.getNotifId());
             System.out.println("Recebido: " + dto.isSuspeita() + " UserId: " + dto.getUserId() + " Destinatario: " + dto.getEmail()+ " NotifId: " + dto.getNotifId());
             sendEmail(dto.getEmail());
 
