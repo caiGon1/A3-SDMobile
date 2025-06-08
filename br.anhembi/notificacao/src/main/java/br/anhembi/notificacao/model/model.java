@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import java.time.LocalDate;
 
+
+
 @Entity
 @Table(name = "bdVerificacao")
 public class model {

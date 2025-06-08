@@ -40,5 +40,15 @@ public class EventoDTO {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+    public EventoDTO() {
+    }
+
+    public EventoDTO(Long userId, Long notifId, String mensagem, LocalDate data) {
+        this.userId = userId;
+        this.notifId = notifId;
+        this.mensagem = mensagem;
+        this.data = data;
+    }
     
 }

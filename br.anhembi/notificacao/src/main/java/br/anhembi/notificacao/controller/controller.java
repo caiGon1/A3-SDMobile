@@ -49,6 +49,11 @@ public class controller {
     @PostMapping
     public ResponseEntity<dto> receber(@RequestBody dto dto) {
         service.processarDto(dto);
+        service.processarSuspeita(dto.getUserId());
         return ResponseEntity.ok(dto);
+    }
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Service is up and running");
     }
 }
